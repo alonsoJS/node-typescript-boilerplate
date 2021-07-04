@@ -1,0 +1,73 @@
+{
+  "name": "node-typescript-boilerplate",
+  "version": "1.0.0",
+  "description": "Node Typescript Boilerplate",
+  "main": "src/index.ts",
+  "private": "false",
+  "engines": {
+    "node": ">=14.15 <15",
+    "npm": ">=6.14 <7"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "build": "tsc && cp -R src/static dist/src",
+    "start": "node dist/src/index.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=4",
+    "debug": "nodemon --watch 'src/**/*.ts' --exec node --inspect -r ts-node/register src/index.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest --watchAll",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alonsoJS/node-typescript-boilerplate.git "
+  },
+  "bugs": {
+    "url": "https://github.com/alonsoJS/node-typescript-boilerplate/issues"
+  },
+  "homepage": "https://github.com/alonsoJS/node-typescript-boilerplate#readme",
+  "dependencies": {
+    "@usefultools/utils": "~6.3.1",
+    "dotenv": "~10.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "~26.0.23",
+    "@typescript-eslint/eslint-plugin": "~4.28.1",
+    "@typescript-eslint/parser": "~4.28.1",
+    "@commitlint/cli": "~12.0.1",
+    "@commitlint/config-conventional": "~12.0.1",
+    "commitlint": "~12.1.4",
+    "eslint": "~7.30.0",
+    "eslint-config-prettier": "~8.3.0",
+    "eslint-plugin-filenames": "~1.3.2",
+    "eslint-plugin-import": "~2.23.4",
+    "eslint-plugin-jest": "~24.3.6",
+    "eslint-plugin-prettier": "~3.4.0",
+    "husky": "~7.0.0",
+    "jest": "~27.0.6",
+    "lint-staged": "~11.0.0",
+    "nodemon": "~2.0.9",
+    "prettier": "~2.3.2",
+    "ts-jest": "~27.0.3",
+    "ts-node": "~10.0.0",
+    "typescript": "~4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run lint"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  }
+}
